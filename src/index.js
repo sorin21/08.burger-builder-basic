@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import  './App.scss';
-import App from './App';
+import "./index.css";
+import App from "./containers/App";
 
-
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App title="Relevant Persons" />, document.getElementById("app"));
