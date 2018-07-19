@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import classes from './App.scss';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     persons: [
       { id: 'asfa1', name: 'Max', age: 28 },
@@ -29,17 +29,22 @@ class App extends Component {
     return true;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  /* shouldComponentUpdate(nextProps, nextState) {
     console.log("[UPDATE App.js] Should Component Update", nextProps, nextState);
-    // console.log("nextProps.persons", nextProps.persons);
-    // console.log("this.props.persons", this.props.persons);
-    // return nextProps.persons !== this.props.persons;
-    return true;
-  }
+    // console.log('nextState.persons', nextState.persons);
+    // console.log('nextState.showPersons', nextState.showPersons);
+    return nextState.persons !== this.state.persons || 
+      nextState.showPersons !== this.state.showPersons;
+    // return true;
+  } */
 
   // componentWillUpdate(nextProps, nextState) {
   //   console.log("[UPDATE App.js] Component Will Update");
   // }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("[UPDATE App.js] Component Did Update", prevProps, prevState);
+  }
 
 
   nameChangedHandler = ( event, id ) => {
