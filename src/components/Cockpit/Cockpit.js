@@ -4,9 +4,10 @@ import classes from './Cockpit.scss';
 
 const cockpit = (props) => {
   const assignedClasses = [];
-  let btnClass = '';
+  let btnClass = classes.Buttton;
   if (props.showPersons) {
-    btnClass = classes.Red;
+    // btnClass = classes.Red;
+    btnClass = [classes.Button, classes.Red].join(" ");
   }
 
   if (props.persons.length <= 2) {
@@ -23,6 +24,7 @@ const cockpit = (props) => {
       <button
         className={btnClass}
         onClick={props.clicked}>Toggle Persons</button>
+      <button onClick={props.login}>Log in</button>
     </div>
   );
 };

@@ -4,6 +4,8 @@ import classes from './App.scss';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
   state = {
     persons: [
@@ -12,7 +14,9 @@ class App extends PureComponent {
       { id: 'asdf11', name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0,
+    authenticated: false
   }
 
   //WARNING! To be deprecated in React v17. Use componentDidMount instead.
@@ -75,7 +79,14 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState( { showPersons: !doesShow } );
+    this.setState((prevState) => ({ 
+      showPersons: !doesShow,  
+      toggleClicked: prevState.toggleClicked + 1
+    }) );
+  }
+
+  loginHandler = () => {
+    this.setState(() => ({authenticated: true}))
   }
 
   render () {
@@ -96,8 +107,11 @@ class App extends PureComponent {
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
-          clicked={this.togglePersonsHandler} />
-        {persons}
+          clicked={this.togglePersonsHandler}
+          login={this.loginHandler} />
+        <AuthContext.Provider value={this.state.authenticated}>
+          {persons}
+        </AuthContext.Provider>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));

@@ -5,9 +5,11 @@ class Persons extends PureComponent {
   // componentWillMount() {
   //   console.log("[Persons.js] Component will mount");
   // }
+  lastPersRef = React.createRef();
 
   componentDidMount() {
     console.log("[Persons.js] Component did mount");
+    this.lastPersRef.current.focus();
   }
 
   //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
@@ -17,7 +19,11 @@ class Persons extends PureComponent {
   // }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("[UPDATE Persons.js] Get Derived State From Props", nextProps, prevState);
+    console.log(
+      "[UPDATE Persons.js] Get Derived State From Props",
+      nextProps,
+      prevState
+    );
     return true;
   }
 
@@ -25,8 +31,8 @@ class Persons extends PureComponent {
   //   console.log("[UPDATE Persons.js] Should Component Update", nextProps, nextState);
   //   // console.log("nextProps.persons", nextProps.persons);
   //   // console.log("this.props.persons", this.props.persons);
-  //   return nextProps.persons !== this.props.persons || 
-  //     nextProps.changed !== this.props.changed || 
+  //   return nextProps.persons !== this.props.persons ||
+  //     nextProps.changed !== this.props.changed ||
   //     nextProps.clicked !== this.props.clicked;
   //   // return true;
   // }
@@ -34,7 +40,6 @@ class Persons extends PureComponent {
   // componentWillUpdate(nextProps, nextState) {
   //   console.log("[UPDATE Persons.js] Component Will Update");
   // }
-  
 
   render() {
     console.log("[Persons.js] Inside render");
@@ -45,7 +50,10 @@ class Persons extends PureComponent {
           name={person.name}
           age={person.age}
           key={person.id}
+          position={index}
           changed={event => this.props.changed(event, person.id)}
+          ref={this.lastPersRef}
+          // authenticated={this.props.isAutheticated}
         />
       );
     });
