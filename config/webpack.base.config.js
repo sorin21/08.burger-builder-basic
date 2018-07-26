@@ -23,6 +23,7 @@ module.exports = {
               loader: "css-loader",
               options: {
                 sourceMap: true,
+                minimize: true,
                 localIdentName: "[name]__[local]__[hash:base64:5]"
               }
             }
@@ -39,6 +40,7 @@ module.exports = {
               options: {
                 modules: true,
                 sourceMap: true,
+                minimize: true,
                 localIdentName: "[name]__[local]__[hash:base64:5]"
               }
             },
@@ -47,6 +49,7 @@ module.exports = {
               options: {
                 modules: true,
                 sourceMap: true,
+                minimize: true,
                 localIdentName: "[name]__[local]__[hash:base64:5]"
               }
             }
@@ -66,11 +69,11 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html"
     }),
-    new ExtractTextPlugin("style.css"),
+    new ExtractTextPlugin("style.css")
     // new BundleAnalyzerPlugin()
   ],
   devServer: {
     historyApiFallback: true,
     compress: isProduction ? true : false
-  },
+  }
 };
